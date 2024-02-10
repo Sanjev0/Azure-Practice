@@ -1,7 +1,22 @@
-echo "Enter a project name that is used to generate resource and resource group names:"
-read projectName
-resourceGroupName="${projectName}rg"
-
-az group create
-  --name $resourceGroupName
-  --location "Central US"
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "functions": [],
+    "variables": {},
+    "resources": [{
+        "name": "myssdacc",
+        "type": "Microsoft.Storage/storageAccounts",
+        "apiVersion": "2023-01-01",
+        "tags": {
+            "displayName": "storageaccount1"
+        },
+        "location": "[resourceGroup(ITOPs).location]",
+        "kind": "StorageV2",
+        "sku": {
+            "name": "Premium_LRS",
+            "tier": "Premium"
+        }
+    }],
+    "outputs": {}
+}
